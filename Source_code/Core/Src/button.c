@@ -36,10 +36,7 @@ void getKeyInput() {
 			timerForKeyPress--;
 			if(timerForKeyPress <= 0) {
 				//TO DO
-				if(keyReg2 == PRESSED_STATE) {
-					subKeyProcess();
-				}
-				timerForKeyPress = 200;
+				keyReg3 = NORMAL_STATE;
 			}
 		}
 	}
