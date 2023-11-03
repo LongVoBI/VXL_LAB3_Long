@@ -16,6 +16,14 @@ int keyReg2 = NORMAL_STATE;
 int keyReg3 = NORMAL_STATE;
 int timerForKeyPress = 200;
 
+int isButton1Pressed() {
+	if(button1_flag == 1) {
+		button1_flag = 0;
+		return 1;
+	}
+	return 0;
+}
+
 void subKeyProcess() {
 	button1_flag = 1;
 }
