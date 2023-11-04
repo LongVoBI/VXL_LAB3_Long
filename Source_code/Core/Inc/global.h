@@ -13,6 +13,10 @@
 #define YELLOW_AUTO		3
 #define GREEN_AUTO		4
 
+#define RED_MAN			10
+#define YELLOW_MAN		11
+#define GREEN_MAN		12
+
 #include "main.h"
 #include "button.h"
 #include "software_timer.h"

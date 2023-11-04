@@ -1,5 +1,6 @@
 "./Core/Src/button.o"
 "./Core/Src/fsm_automatic.o"
+"./Core/Src/fsm_manual.o"
 "./Core/Src/global.o"
 "./Core/Src/main.o"
 "./Core/Src/software_timer.o"

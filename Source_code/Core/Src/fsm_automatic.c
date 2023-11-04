@@ -26,6 +26,11 @@ void fsm_automatic_run() {
 			status = GREEN_AUTO;
 			setTimer1(300);
 		}
+
+		if(isButton1Pressed()) {
+			status = RED_MAN;
+			setTimer1(500);
+		}
 		break;
 	case YELLOW_AUTO:
 		HAL_GPIO_WritePin(LED_RED_GPIO_Port, LED_RED_Pin, SET);
