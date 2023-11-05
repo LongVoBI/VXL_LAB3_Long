@@ -39,7 +39,6 @@ void getKeyInput() {
 				//TO DO
 				subKeyProcess();
 				timerForKeyPress = 200;
-
 			}
 		}
 		else {		// Press and hold

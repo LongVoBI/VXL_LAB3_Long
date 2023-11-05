@@ -8,10 +8,11 @@
 #ifndef INC_GLOBAL_H_
 #define INC_GLOBAL_H_
 
-#define INIT			1
-#define RED_AUTO		2
-#define YELLOW_AUTO		3
-#define GREEN_AUTO		4
+#define INIT				1
+#define RED1_GREEN2_AUTO	2
+#define RED1_AMBER2_AUTO	3
+#define GREEN1_RED2_AUTO	4
+#define AMBER1_RED2_AUTO	5
 
 #define RED_MAN			10
 #define YELLOW_MAN		11
