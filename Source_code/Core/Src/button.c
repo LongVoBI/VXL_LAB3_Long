@@ -21,17 +21,17 @@ uint16_t gpio_pin[NUMBER_BUTTONS] = {button1_Pin, button2_Pin, button3_Pin};
 GPIO_TypeDef* gpio_port[NUMBER_BUTTONS] = {button1_GPIO_Port, button2_GPIO_Port, button3_GPIO_Port};
 
 void initStateForButton() {
-	for (int i = 0; i < NUMBER_OF_BUTTONS; ++i) {
+	for (int i = 0; i < NUMBER_BUTTONS; ++i) {
 	    KeyReg0[i] = NORMAL_STATE;
 	    KeyReg1[i] = NORMAL_STATE;
 	    KeyReg2[i] = NORMAL_STATE;
 	    KeyReg3[i] = NORMAL_STATE;
-	    TimerForKeyPress[i] = 200;
+	    timerForKeyPress[i] = 200;
 	    button_flag[i] = 0;
 	 }
 }
 
-int isButton1Pressed(int key_index) {
+int isButtonPressed(int key_index) {
 	if(button_flag[key_index] == 1) {
 		button_flag[key_index] = 0;
 		return 1;

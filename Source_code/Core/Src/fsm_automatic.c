@@ -10,46 +10,108 @@
 void fsm_automatic_run() {
 	switch(status) {
 	case INIT:
-		HAL_GPIO_WritePin(LED_RED1_GPIO_Port, LED_RED1_Pin, SET);
-		HAL_GPIO_WritePin(LED_YELLOW1_GPIO_Port, LED_YELLOW1_Pin, SET);
-		HAL_GPIO_WritePin(LED_GREEN1_GPIO_Port, LED_GREEN1_Pin, SET);
+		turnOffLed();
 
-		status = RED_AUTO;
-		setTimer1(500);
+		status = RED1_GREEN2_AUTO;
+		counter1 = 5;
+		counter2 = 3;
+		setTimer1(300);
+		setTimer2(100);
 		break;
-	case RED_AUTO:
-		HAL_GPIO_WritePin(LED_RED1_GPIO_Port, LED_RED1_Pin, RESET);
-		HAL_GPIO_WritePin(LED_YELLOW1_GPIO_Port, LED_YELLOW1_Pin, SET);
-		HAL_GPIO_WritePin(LED_GREEN1_GPIO_Port, LED_GREEN1_Pin, SET);
+	case RED1_GREEN2_AUTO:
+		displayLed(RED1_GREEN2);
 
-		if(timer1_flag == 1) {
-			status = GREEN_AUTO;
-			setTimer1(300);
+		display7SEG_road1(counter1);
+		display7SEG_road2(counter2);
+		if(timer2_flag == 1) {
+			setTimer2(100);
+			counter1--;
+			counter2--;
 		}
 
-		if(isButton1Pressed()) {
-			status = RED_MAN;
-			setTimer1(500);
-		}
-		break;
-	case YELLOW_AUTO:
-		HAL_GPIO_WritePin(LED_RED1_GPIO_Port, LED_RED1_Pin, SET);
-		HAL_GPIO_WritePin(LED_YELLOW1_GPIO_Port, LED_YELLOW1_Pin, RESET);
-		HAL_GPIO_WritePin(LED_GREEN1_GPIO_Port, LED_GREEN1_Pin, SET);
-
 		if(timer1_flag == 1) {
-			status = RED_AUTO;
-			setTimer1(500);
-		}
-		break;
-	case GREEN_AUTO:
-		HAL_GPIO_WritePin(LED_RED1_GPIO_Port, LED_RED1_Pin, SET);
-		HAL_GPIO_WritePin(LED_YELLOW1_GPIO_Port, LED_YELLOW1_Pin, SET);
-		HAL_GPIO_WritePin(LED_GREEN1_GPIO_Port, LED_GREEN1_Pin, RESET);
-
-		if(timer1_flag == 1) {
-			status = YELLOW_AUTO;
+			status = RED1_YELLOW2_AUTO;
 			setTimer1(200);
+			counter1 = 2;
+			counter2 = 2;
+		}
+
+		if(isButtonPressed(0)) {
+			status = RED_MAN;
+			timerMan = 100;
+			setTimer3(200);
+		}
+		break;
+	case RED1_YELLOW2_AUTO:
+		displayLed(RED1_YELLOW2);
+
+		display7SEG_road1(counter1);
+		display7SEG_road2(counter2);
+		if(timer2_flag == 1) {
+			setTimer2(100);
+			counter1--;
+			counter2--;
+		}
+
+		if(timer1_flag == 1) {
+			status = GREEN1_RED2_AUTO;
+			setTimer1(300);
+			counter1 = 3;
+			counter2 = 5;
+		}
+
+		if(isButtonPressed(0)) {
+			status = RED_MAN;
+			timerMan = 100;
+			setTimer3(200);
+		}
+		break;
+	case GREEN1_RED2_AUTO:
+		displayLed(GREEN1_RED2);
+
+		display7SEG_road1(counter1);
+		display7SEG_road2(counter2);
+		if(timer2_flag == 1) {
+			setTimer2(100);
+			counter1--;
+			counter2--;
+		}
+
+		if(timer1_flag == 1) {
+			status = YELLOW1_RED2_AUTO;
+			setTimer1(200);
+			counter1 = 2;
+			counter2 = 2;
+		}
+
+		if(isButtonPressed(0)) {
+			status = RED_MAN;
+			timerMan = 100;
+			setTimer3(200);
+		}
+		break;
+	case YELLOW1_RED2_AUTO:
+		displayLed(YELLOW1_RED2);
+
+		display7SEG_road1(counter1);
+		display7SEG_road2(counter2);
+		if(timer2_flag == 1) {
+			setTimer2(100);
+			counter1--;
+			counter2--;
+		}
+
+		if(timer1_flag == 1) {
+			status = RED1_GREEN2_AUTO;
+			setTimer1(300);
+			counter1 = 5;
+			counter2 = 3;
+		}
+
+		if(isButtonPressed(0)) {
+			status = RED_MAN;
+			timerMan = 100;
+			setTimer3(200);
 		}
 		break;
 	default:

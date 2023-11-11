@@ -10,6 +10,7 @@
 
 #include "global.h"
 
+
 void fsm_automatic_run();
 
 #endif /* INC_FSM_AUTOMATIC_H_ */
