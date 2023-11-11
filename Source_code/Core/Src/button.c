@@ -7,48 +7,65 @@
 
 #include "button.h"
 
-int button1_flag = 0;
+#define NUMBER_BUTTONS		3
 
-int keyReg0 = NORMAL_STATE;
-int keyReg1 = NORMAL_STATE;
-int keyReg2 = NORMAL_STATE;
+int KeyReg0[NUMBER_BUTTONS];
+int KeyReg1[NUMBER_BUTTONS];
+int KeyReg2[NUMBER_BUTTONS];
+int KeyReg3[NUMBER_BUTTONS];
 
-int keyReg3 = NORMAL_STATE;
-int timerForKeyPress = 200;
+int timerForKeyPress[NUMBER_BUTTONS];
+int button_flag[NUMBER_BUTTONS];
 
-int isButton1Pressed() {
-	if(button1_flag == 1) {
-		button1_flag = 0;
+uint16_t gpio_pin[NUMBER_BUTTONS] = {button1_Pin, button2_Pin, button3_Pin};
+GPIO_TypeDef* gpio_port[NUMBER_BUTTONS] = {button1_GPIO_Port, button2_GPIO_Port, button3_GPIO_Port};
+
+void initStateForButton() {
+	for (int i = 0; i < NUMBER_OF_BUTTONS; ++i) {
+	    KeyReg0[i] = NORMAL_STATE;
+	    KeyReg1[i] = NORMAL_STATE;
+	    KeyReg2[i] = NORMAL_STATE;
+	    KeyReg3[i] = NORMAL_STATE;
+	    TimerForKeyPress[i] = 200;
+	    button_flag[i] = 0;
+	 }
+}
+
+int isButton1Pressed(int key_index) {
+	if(button_flag[key_index] == 1) {
+		button_flag[key_index] = 0;
 		return 1;
 	}
 	return 0;
 }
 
-void subKeyProcess() {
-	button1_flag = 1;
+void subKeyProcess(int key_index) {
+	button_flag[key_index] = 1;
 }
 
 void getKeyInput() {
-	keyReg0 = keyReg1;
-	keyReg1 = keyReg2;
-	keyReg2 = HAL_GPIO_ReadPin(button1_GPIO_Port, button1_Pin);
-	if((keyReg0 == keyReg1) && (keyReg1 == keyReg2)) {
-		if(keyReg3 != keyReg2) {	// Press and release
-			keyReg3 = keyReg2;
-			if(keyReg2 == PRESSED_STATE) {
-				//TO DO
-				subKeyProcess();
-				timerForKeyPress = 200;
-			}
-		}
-		else {		// Press and hold
-			timerForKeyPress--;
-			if(timerForKeyPress <= 0) {
-				//TO DO
-				if(keyReg2 == PRESSED_STATE) {
-					subKeyProcess();
+	for(int i = 0; i<NUMBER_BUTTONS; i++) {
+		KeyReg0[i] = KeyReg1[i];
+		KeyReg1[i] = KeyReg2[i];
+		KeyReg2[i] = HAL_GPIO_ReadPin(gpio_port[i], gpio_pin[i]);
+		if((KeyReg0[i] == KeyReg1[i]) && (KeyReg1[i] == KeyReg2[i])) {
+			if(KeyReg3[i] != KeyReg2[i]) {	// Press and release
+				KeyReg3[i] = KeyReg2[i];
+				if(KeyReg2[i] == PRESSED_STATE) {
+					//TO DO
+					subKeyProcess(i);
+					timerForKeyPress[i] = 200;
 				}
-				timerForKeyPress = 200;
+			}
+			else {		// Press and hold
+				timerForKeyPress[i]--;
+				if(timerForKeyPress[i] <= 0) {
+					//TO DO
+					if(KeyReg2[i] == PRESSED_STATE) {
+						subKeyProcess(i);
+					}
+					timerForKeyPress[i] = 200;
+				}
 			}
 		}
 	}
