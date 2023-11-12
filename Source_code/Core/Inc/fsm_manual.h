@@ -12,5 +12,8 @@
 
 void fsm_manual_run();
 
+void switchMode3();
+void switchMode3();
+
 
 #endif /* INC_FSM_MANUAL_H_ */

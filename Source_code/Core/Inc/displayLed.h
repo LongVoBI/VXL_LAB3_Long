@@ -18,7 +18,7 @@ void display7SEG(int counter);
 void displayLed(int index);
 void turnOffLed();
 
-extern const int MAX_LED;
+const int MAX_LED;
 
 extern int counter1;
 extern int counter2;

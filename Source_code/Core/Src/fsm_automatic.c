@@ -7,6 +7,16 @@
 
 #include "fsm_automatic.h"
 
+void switchMode2() {
+	status = RED_MAN;
+	counter1 = 3;
+	setTimer1(300);
+	setTimer2(100);
+	setTimer3(300);
+	setTimer4(25);
+	updateLedBufferVal(0, 2, counter1, 2);
+}
+
 void fsm_automatic_run() {
 	switch(status) {
 	case INIT:
@@ -42,9 +52,7 @@ void fsm_automatic_run() {
 		}
 
 		if(isButtonPressed(0)) {
-			status = RED_MAN;
-			timerMan = 100;
-			setTimer3(200);
+			switchMode2();
 		}
 		break;
 	case RED1_YELLOW2_AUTO:
@@ -68,9 +76,7 @@ void fsm_automatic_run() {
 		}
 
 		if(isButtonPressed(0)) {
-			status = RED_MAN;
-			timerMan = 100;
-			setTimer3(200);
+			switchMode2();
 		}
 		break;
 	case GREEN1_RED2_AUTO:
@@ -94,9 +100,7 @@ void fsm_automatic_run() {
 		}
 
 		if(isButtonPressed(0)) {
-			status = RED_MAN;
-			timerMan = 100;
-			setTimer3(200);
+			switchMode2();
 		}
 		break;
 	case YELLOW1_RED2_AUTO:
@@ -120,9 +124,7 @@ void fsm_automatic_run() {
 		}
 
 		if(isButtonPressed(0)) {
-			status = RED_MAN;
-			timerMan = 100;
-			setTimer3(200);
+			switchMode2();
 		}
 		break;
 	default:

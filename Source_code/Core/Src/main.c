@@ -25,7 +25,7 @@
 #include "software_timer.h"
 #include "button.h"
 #include "fsm_automatic.h"
-//#include "fsm_manual.h"
+#include "fsm_manual.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -101,7 +101,11 @@ int main(void)
   status = INIT;
   while (1)
   {
-	  fsm_automatic_run();
+	 if(status == INIT || status == RED1_GREEN2_AUTO || status == RED1_YELLOW2_AUTO ||
+		status == GREEN1_RED2_AUTO || status == YELLOW1_RED2_AUTO) {
+		 fsm_automatic_run();
+	 }
+	 else fsm_manual_run();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
