@@ -97,7 +97,7 @@ void displayLed(int led_index) {
 	}
 }
 
-void updateLedBuffer() {
+void scanLedBuffer() {
 	if(timer5_flag == 1) {
 		setTimer5(25);
 		update7SEG(index_led);

@@ -11,7 +11,7 @@
 #include "global.h"
 
 void update7SEG(int index);
-void updateLedBuffer();
+void scanLedBuffer();
 void updateLedBufferVal(int val0, int val1, int val2, int val3);
 void display7SEG(int counter);
 

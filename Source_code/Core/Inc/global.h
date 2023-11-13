@@ -33,6 +33,9 @@
 
 extern int status;
 extern int led_index;
+extern int redTimer;
+extern int yellowTimer;
+extern int greenTimer;
 
 
 #endif /* INC_GLOBAL_H_ */

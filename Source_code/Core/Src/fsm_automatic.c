@@ -9,12 +9,11 @@
 
 void switchMode2() {
 	status = RED_MAN;
-	counter1 = 3;
-	setTimer1(300);
+	counter1 = redTimer;
 	setTimer2(100);
-	setTimer3(300);
 	setTimer4(25);
-	updateLedBufferVal(0, 2, counter1, 2);
+
+	updateLedBufferVal(counter1/10, 2, counter1%10, 2);
 }
 
 void fsm_automatic_run() {
@@ -23,32 +22,30 @@ void fsm_automatic_run() {
 		turnOffLed();
 
 		status = RED1_GREEN2_AUTO;
-		counter1 = 5;
-		counter2 = 3;
+		counter1 = redTimer;
+		counter2 = greenTimer;
 
-		updateLedBufferVal(counter1, counter2, counter1, counter2);
-		setTimer1(300);
+		updateLedBufferVal(counter1/10, counter2/10, counter1%10, counter2%10);
+		setTimer1(greenTimer*100);
 		setTimer2(100);
 		setTimer5(25);
 		break;
 	case RED1_GREEN2_AUTO:
 		displayLed(RED1_GREEN2);
 
-		updateLedBuffer();
-
 		if(timer2_flag == 1) {
 			setTimer2(100);
 			counter1--;
 			counter2--;
-			updateLedBufferVal(counter1, counter2, counter1, counter2);
+			updateLedBufferVal(counter1/10, counter2/10, counter1%10, counter2%10);
 		}
 
 		if(timer1_flag == 1) {
 			status = RED1_YELLOW2_AUTO;
-			setTimer1(200);
-			counter1 = 2;
-			counter2 = 2;
-			updateLedBufferVal(counter1, counter2, counter1, counter2);
+			setTimer1((redTimer-greenTimer)*100);
+			counter1 = redTimer-greenTimer;
+			counter2 = yellowTimer;
+			updateLedBufferVal(counter1/10, counter2/10, counter1%10, counter2%10);
 		}
 
 		if(isButtonPressed(0)) {
@@ -58,21 +55,19 @@ void fsm_automatic_run() {
 	case RED1_YELLOW2_AUTO:
 		displayLed(RED1_YELLOW2);
 
-		updateLedBuffer();
-
 		if(timer2_flag == 1) {
 			setTimer2(100);
 			counter1--;
 			counter2--;
-			updateLedBufferVal(counter1, counter2, counter1, counter2);
+			updateLedBufferVal(counter1/10, counter2/10, counter1%10, counter2%10);
 		}
 
 		if(timer1_flag == 1) {
 			status = GREEN1_RED2_AUTO;
-			setTimer1(300);
-			counter1 = 3;
-			counter2 = 5;
-			updateLedBufferVal(counter1, counter2, counter1, counter2);
+			setTimer1(greenTimer*100);
+			counter1 = greenTimer;
+			counter2 = redTimer;
+			updateLedBufferVal(counter1/10, counter2/10, counter1%10, counter2%10);
 		}
 
 		if(isButtonPressed(0)) {
@@ -82,21 +77,19 @@ void fsm_automatic_run() {
 	case GREEN1_RED2_AUTO:
 		displayLed(GREEN1_RED2);
 
-		updateLedBuffer();
-
 		if(timer2_flag == 1) {
 			setTimer2(100);
 			counter1--;
 			counter2--;
-			updateLedBufferVal(counter1, counter2, counter1, counter2);
+			updateLedBufferVal(counter1/10, counter2/10, counter1%10, counter2%10);
 		}
 
 		if(timer1_flag == 1) {
 			status = YELLOW1_RED2_AUTO;
-			setTimer1(200);
-			counter1 = 2;
-			counter2 = 2;
-			updateLedBufferVal(counter1, counter2, counter1, counter2);
+			setTimer1((redTimer-greenTimer)*100);
+			counter1 = yellowTimer;
+			counter2 = redTimer-greenTimer;
+			updateLedBufferVal(counter1/10, counter2/10, counter1%10, counter2%10);
 		}
 
 		if(isButtonPressed(0)) {
@@ -106,21 +99,19 @@ void fsm_automatic_run() {
 	case YELLOW1_RED2_AUTO:
 		displayLed(YELLOW1_RED2);
 
-		updateLedBuffer();
-
 		if(timer2_flag == 1) {
 			setTimer2(100);
 			counter1--;
 			counter2--;
-			updateLedBufferVal(counter1, counter2, counter1, counter2);
+			updateLedBufferVal(counter1/10, counter2/10, counter1%10, counter2%10);
 		}
 
 		if(timer1_flag == 1) {
 			status = RED1_GREEN2_AUTO;
-			setTimer1(300);
-			counter1 = 5;
-			counter2 = 3;
-			updateLedBufferVal(counter1, counter2, counter1, counter2);
+			setTimer1(greenTimer*100);
+			counter1 = redTimer;
+			counter2 = greenTimer;
+			updateLedBufferVal(counter1/10, counter2/10, counter1%10, counter2%10);
 		}
 
 		if(isButtonPressed(0)) {

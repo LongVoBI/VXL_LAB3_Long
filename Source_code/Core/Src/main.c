@@ -101,11 +101,8 @@ int main(void)
   status = INIT;
   while (1)
   {
-	 if(status == INIT || status == RED1_GREEN2_AUTO || status == RED1_YELLOW2_AUTO ||
-		status == GREEN1_RED2_AUTO || status == YELLOW1_RED2_AUTO) {
-		 fsm_automatic_run();
-	 }
-	 else fsm_manual_run();
+	 fsm_automatic_run();
+	 fsm_manual_run();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -247,6 +244,7 @@ static void MX_GPIO_Init(void)
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim) {
 	timerRun();
 	getKeyInput();
+	scanLedBuffer();
 };
 /* USER CODE END 4 */
 
